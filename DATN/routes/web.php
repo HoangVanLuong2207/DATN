@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\DanhmucController;
+use App\Http\Controllers\admin\SanphamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,6 @@ Route::post('/admin/danhmuc/store',[DanhmucController::class,'store'])->name('da
 Route::get('/admin/danhmuc/delete/{id}',[DanhmucController::class,'delete'])->name('danhmuc.delete');
 Route::get('/admin/danhmuc/edit/{id}',[DanhmucController::class,'edit'])->name('danhmuc.edit');
 Route::post('/admin/danhmuc/update/{id}',[DanhmucController::class,'update'])->name('danhmuc.update');
+
+// Sản phẩm 
+Route::get('/admin/sanpham',[SanphamController::class,'index'])->name('sanpham.index');
