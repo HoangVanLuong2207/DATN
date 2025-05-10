@@ -108,16 +108,10 @@ class SanphamController extends Controller
     public function delete($id)
 {
     $sanpham = sanpham::findOrFail($id);
-
-    // Xóa file ảnh nếu tồn tại
     if ($sanpham->image && Storage::exists('public/uploads/' . $sanpham->image)) {
         Storage::delete('public/uploads/' . $sanpham->image);
     }
-
-    // Thực hiện soft delete
     $sanpham->delete();
-
     return redirect()->route('sanpham.index')->with('success', 'Đã xóa sản phẩm và ảnh!');
 }
-
 }
