@@ -1,7 +1,7 @@
 @include('header')
   <div class="control">
     <button type="submit" class="button green">
-        <a href="">Thêm danh mục</a>
+        <a href="{{ route('sanpham.create') }}">Thêm sản phẩm</a>
     </button>
             </di>
   <div class="card has-table">
@@ -25,7 +25,7 @@
               </label>
             </th>
             <th class="image-cell"></th>
-            <th>Id sản phẩm</th>
+            <!-- <th>Id sản phẩm</th> -->
             <th>Tên sản phẩm</th>
             <th>Giá</th>
             <th>Ảnh sản phẩm</th>
@@ -45,17 +45,17 @@
             </td>
             <td class="image-cell">
             </td>
-            <td data-label="Name">{{ $item['id'] }}</td>
+            <!-- <td data-label="Name">{{ $item['id'] }}</td> -->
             <td data-label="Company">{{ $item['name'] }}</td>
             <td data-label="Company">{{ number_format($item['price']) }} VND</td>
-            <td data-label="Company">{{ $item['image'] }}</td>
+            <td data-label="Company"><img src="{{ url("/storage/uploads/$item->image") }}"  width="100px" alt=""></td>
             <td data-label="Company">{{ $item['mota'] }}</td>
             <td data-label="Company">{{ $item->danhmuc->name ?? 'Không có danh mục' }}</td>
             <td class="actions-cell">
-                <a href="" class="button small blue">
+                <a href="{{ route('sanpham.edit', ['id' => $item->id]) }}" class="button small blue">
                     <span class="icon"><i class="mdi mdi-pencil"></i></span>
                 </a>
-               <a href="" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" class="button small red">
+               <a href="{{ route('sanpham.delete', ['id' => $item->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" class="button small red">
                   <span class="icon">
                       <i class="mdi mdi-trash-can"></i>
                   </span>

@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\DanhmucController;
 use App\Http\Controllers\admin\SanphamController;
+use Database\Seeders\SanphamSeeder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,8 @@ Route::post('/admin/danhmuc/update/{id}',[DanhmucController::class,'update'])->n
 
 // Sản phẩm 
 Route::get('/admin/sanpham',[SanphamController::class,'index'])->name('sanpham.index');
+Route::get('/admin/sanpham/create', [SanphamController::class, 'create'])->name('sanpham.create');
+Route::post('/admin/sanpham/store', [SanphamController::class, 'store'])->name('sanpham.store');
+Route::get('/admin/sanpham/edit/{id}',[SanphamController::class, 'edit'])->name('sanpham.edit');
+Route::post('/admin/sanpham/update/{id}',[SanphamController::class, 'update'])->name('sanpham.update');
+Route::get('/admin/sanpham/delete/{id}',[SanphamController::class, 'delete'])->name('sanpham.delete');

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Models\sanpham;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Danhmuc;
+use Illuminate\Support\Facades\Storage;
+
 use Laravel\Sanctum\Sanctum;
 
 class SanphamController extends Controller
@@ -24,7 +27,8 @@ class SanphamController extends Controller
      */
     public function create()
     {
-        //
+        $danhmuc = Danhmuc::all();
+        return view('admin.sanpham.add', compact('danhmuc'));
     }
 
     /**
@@ -32,38 +36,88 @@ class SanphamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'price' => 'required|numeric',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'mota' => 'required|string',
+            'id_danhmuc'  => 'required|exists:danhmucs,id',
+        ]);
+        $name = $request->name;
+        $price = $request->price;
+        $image = $request->file('image');
+        $fileName = uniqid() .$image->getClientOriginalName();
+        $image->storeAs('public/uploads/',$fileName);
+        $mota = $request->mota;
+        $id_danhmuc = $request->id_danhmuc;
+        sanpham::insert([
+            'name' => $name,
+            'price' => $price,
+            'image' => $fileName,
+            'mota' => $mota,
+            'id_danhmuc' => $id_danhmuc,
+        ]);
+        return redirect()->route('sanpham.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(sanpham $sanpham)
+    public function edit($id)
     {
-        //
+        $sanpham = sanpham::find($id);
+        $danhmuc = Danhmuc::all();
+        return view('admin.sanpham.edit', compact('danhmuc', 'sanpham'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(sanpham $sanpham)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, sanpham $sanpham)
-    {
-        //
-    }
-
+   public function update(Request $request, $id){
+        $sanpham = sanpham::findOrFail($id);
+        $request->validate([
+        'name'        => 'required|string',
+        'price'       => 'required|numeric',
+        'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'mota'        => 'required|string',
+        'id_danhmuc'  => 'required|exists:danhmucs,id',
+        ]);
+        if ($request->hasFile('image')) {
+        if ($sanpham->image && Storage::exists('public/uploads/' . $sanpham->image)) {
+            Storage::delete('public/uploads/' . $sanpham->image);
+        }
+        $image    = $request->file('image');
+        $fileName = uniqid() . '_' . $image->getClientOriginalName();
+        $image->storeAs('public/uploads', $fileName);
+        $sanpham->image = $fileName;
+        }
+        $sanpham->name        = $request->name;
+        $sanpham->price       = $request->price;
+        $sanpham->mota        = $request->mota;
+        $sanpham->id_danhmuc  = $request->id_danhmuc;
+        $sanpham->save();
+        return redirect()->route('sanpham.index')->with('success', 'Cập nhật thành công!');
+        }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(sanpham $sanpham)
-    {
-        //
+    public function delete($id)
+{
+    $sanpham = sanpham::findOrFail($id);
+
+    // Xóa file ảnh nếu tồn tại
+    if ($sanpham->image && Storage::exists('public/uploads/' . $sanpham->image)) {
+        Storage::delete('public/uploads/' . $sanpham->image);
     }
+
+    // Thực hiện soft delete
+    $sanpham->delete();
+
+    return redirect()->route('sanpham.index')->with('success', 'Đã xóa sản phẩm và ảnh!');
+}
+
 }
