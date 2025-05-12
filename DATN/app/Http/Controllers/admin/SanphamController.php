@@ -34,8 +34,7 @@ class SanphamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'name' => 'required|string',
             'price' => 'required|numeric',
@@ -80,11 +79,11 @@ class SanphamController extends Controller
    public function update(Request $request, $id){
         $sanpham = sanpham::findOrFail($id);
         $request->validate([
-        'name'        => 'required|string',
-        'price'       => 'required|numeric',
-        'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        'mota'        => 'required|string',
-        'id_danhmuc'  => 'required|exists:danhmucs,id',
+        'name'=> 'required|string',
+        'price'=> 'required|numeric',
+        'image'=> 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'mota'=> 'required|string',
+        'id_danhmuc'=> 'required|exists:danhmucs,id',
         ]);
         if ($request->hasFile('image')) {
         if ($sanpham->image && Storage::exists('public/uploads/' . $sanpham->image)) {
@@ -95,29 +94,23 @@ class SanphamController extends Controller
         $image->storeAs('public/uploads', $fileName);
         $sanpham->image = $fileName;
         }
-        $sanpham->name        = $request->name;
-        $sanpham->price       = $request->price;
-        $sanpham->mota        = $request->mota;
-        $sanpham->id_danhmuc  = $request->id_danhmuc;
+        $sanpham->name = $request->name;
+        $sanpham->price = $request->price;
+        $sanpham->mota = $request->mota;
+        $sanpham->id_danhmuc = $request->id_danhmuc;
         $sanpham->save();
         return redirect()->route('sanpham.index')->with('success', 'Cập nhật thành công!');
         }
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($id)
-{
+    public function delete($id){
     $sanpham = sanpham::findOrFail($id);
-
-    // Xóa file ảnh nếu tồn tại
     if ($sanpham->image && Storage::exists('public/uploads/' . $sanpham->image)) {
         Storage::delete('public/uploads/' . $sanpham->image);
     }
-
-    // Thực hiện soft delete
     $sanpham->delete();
-
     return redirect()->route('sanpham.index')->with('success', 'Đã xóa sản phẩm và ảnh!');
-}
+    }
 
 }
