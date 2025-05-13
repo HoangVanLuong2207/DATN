@@ -94,17 +94,14 @@
           <div class="w-100"></div>
           <div class="col-md-12">
               <div class="form-group mt-4">
-                                  <div class="radio">
-                                    <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-                                    <label><input type="radio" name="optradio"> Ship to different address</label>
-                                  </div>
-                              </div>
+          <div class="radio">
+              <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
+              <label><input type="radio" name="optradio"> Ship to different address</label>
           </div>
           </div>
-        </form><!-- END -->
-
-
-
+          </div>
+          </div>
+        </form>
         <div class="row mt-5 pt-3 d-flex">
             <div class="col-md-6 d-flex">
                 <div class="cart-detail cart-total ftco-bg-dark p-3 p-md-4">
@@ -160,14 +157,10 @@
                                   </div>
                               </div>
                               <p><a href="#"class="btn btn-primary py-3 px-4">Place an order</a></p>
-                          </div>
-            </div>
-        </div>
-    </div> <!-- .col-md-8 -->
-
-
-
-
+                        </div>         
+                </div>
+          </div>
+    </div> 
     <div class="col-xl-4 sidebar ftco-animate">
       <div class="sidebar-box">
         <form action="#" class="search-form">

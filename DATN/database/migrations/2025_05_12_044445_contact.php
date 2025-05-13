@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_size', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',255);
-            $table->foreignId('product_id')->constrained('product')->onDelete('cascade');
-            $table->foreignId('size_id')->constrained('size')->onDelete('cascade');
-            $table->timestamps();
-        });
+        Schema::create('contact', function (Blueprint $table) {
+        $table->id();
+        $table->string('name',255);
+        $table->string('email',255);
+        $table->text('massage');
+        $table->softDeletes();
+        $table->timestamps();
+    });
     }
 
     /**

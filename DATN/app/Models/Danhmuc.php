@@ -14,5 +14,9 @@ class Danhmuc extends Model
 {
     return $this->belongsTo(Danhmuc::class, 'id_danhmuc');
 }
+public function sanphams()
+{
+    return $this->hasMany(Sanpham::class, 'id_danhmuc');
+}
 
 }

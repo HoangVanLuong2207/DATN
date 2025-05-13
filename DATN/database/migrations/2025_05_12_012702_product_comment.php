@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('product_comment', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('product_id')->constrained('products');
-        $table->foreignId('customer_id')->constrained('customer');
+        $table->foreignId('product_id')->constrained('sanphams')->onDelete('cascade');
+        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         $table->text('comment');
+        $table->tinyInteger('rating');
         $table->timestamps();
     });
 

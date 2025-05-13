@@ -18,8 +18,6 @@ return new class extends Migration
         $table->string('product_name');
         $table->decimal('product_price', 10, 2);
         $table->integer('quantity');
-        $table->foreignId('size_id')->constrained('size');
-        $table->foreignId('topping_id')->nullable()->constrained('topping');
         $table->decimal('total', 10, 2);
         $table->timestamps();
     });

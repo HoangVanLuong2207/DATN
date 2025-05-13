@@ -1,9 +1,6 @@
 @include('header')
   <div class="control">
-    <button type="submit" class="button green">
-        <a href="{{ route('sanpham.create') }}">Thêm sản phẩm</a>
-    </button>
-            </di>
+            </div>
   <div class="card has-table">
       <header class="card-header">
         <p class="card-header-title">
@@ -25,17 +22,13 @@
               </label>
             </th>
             <th class="image-cell"></th>
-            <!-- <th>Id sản phẩm</th> -->
-            <th>Tên sản phẩm</th>
-            <th>Giá</th>
-            <th>Ảnh sản phẩm</th>
-            <th>Mô tả</th>
-            <th>Tên danh mục</th>
-            <th>Hành động</th>  
+            <th>Tên khách hàng</th>
+            <th>Nội dung</th>
+            <th>Ngày liên hệ</th>
           </tr>
           </thead>
           <tbody>
-          @foreach ($sanpham as $item)
+          @foreach ($contact as $item)
           <tr>
             <td class="checkbox-cell">
               <label class="checkbox">
@@ -45,17 +38,11 @@
             </td>
             <td class="image-cell">
             </td>
-            <!-- <td data-label="Name">{{ $item['id'] }}</td> -->
             <td data-label="Company">{{ $item['name'] }}</td>
-            <td data-label="Company">{{ number_format($item['price']) }} VND</td>
-            <td data-label="Company"><img src="{{ url("/storage/uploads/$item->image") }}"  width="100px" alt=""></td>
-            <td data-label="Company">{{ $item['mota'] }}</td>
-            <td data-label="Company">{{ $item->danhmuc->name ?? 'Không có danh mục' }}</td>
+            <td data-label="Company">{{ $item['massage'] }}</td>
+            <td data-label="Company">{{ $item['created_at']->format('d/m/Y') }}</td>
             <td class="actions-cell">
-                <a href="{{ route('sanpham.edit', ['id' => $item->id]) }}" class="button small blue">
-                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
-                </a>
-               <a href="{{ route('sanpham.delete', ['id' => $item->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" class="button small red">
+               <a href="{{ route('contact.delete', ['id' => $item->id]) }}" onclick="return confirm('Bạn có chắc chắn muốn xóa ?')" class="button small red">
                   <span class="icon">
                       <i class="mdi mdi-trash-can"></i>
                   </span>
@@ -64,10 +51,7 @@
             @endforeach
           </tbody>
         </table>
-        <div class="table-pagination mt-4">
-          {{ $sanpham->links() }}
-        </div>
-        <!-- <div class="table-pagination">
+        <div class="table-pagination">
           <div class="flex items-center justify-between">
             <div class="buttons">
               <button type="button" class="button active">1</button>
@@ -76,7 +60,7 @@
             </div>
             <small>Page 1 of 3</small>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 @include('footer')
