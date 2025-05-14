@@ -4,7 +4,7 @@
     <!-- END nav -->
 
     <section class="home-slider owl-carousel">
-     <div class="slider-item" style="background-image: url('{{ asset('images/bg_1.jpg') }}');">
+		<div class="slider-item" style="background-image: url('{{ asset('asset/images/bg_1.jpg') }}');">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="slider-item" style="background-image: url(images/bg_2.jpg);">
+      <div class="slider-item" style="background-image: url('{{ asset('asset/images/bg_2.jpg') }}');">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <div class="slider-item" style="background-image: url(images/bg_3.jpg);">
+      <div class="slider-item" style="background-image: url('{{ asset('asset/images/bg_3.jpg') }}');">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -124,7 +124,7 @@
     </section>
 
     <section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url(images/about.jpg);"></div>
+    	<div class="one-half img" style="background-image: url('{{ asset('asset/images/about.jpg') }}');"></div>
     	<div class="one-half ftco-animate">
     		<div class="overlap">
 	        <div class="heading-section ftco-animate ">
@@ -192,22 +192,22 @@
     				<div class="row">
     					<div class="col-md-6">
     						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-1.jpg') }}');"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-2.jpg') }}');"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-3.jpg') }}');"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-4.jpg') }}');"></a>
 		    				</div>
     					</div>
     				</div>
@@ -216,7 +216,7 @@
     	</div>
     </section>
 
-    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url(images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url('{{ asset('asset/images/bg_2.jpg') }}');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
       <div class="container">
         <div class="row justify-content-center">
@@ -277,7 +277,7 @@
         	@foreach ($sanpham as $item)
         	<div class="col-md-3">
         		<div class="menu-entry">
-						<a href="{{ route('client.ctsp',['id'=>$item->id]) }}"><img src="{{ url("/storage/uploads/$item->image") }}"   alt=""></a>
+						<a href="{{ route('client.product.detail',['id'=>$item->id]) }}"><img src="{{ url("/storage/uploads/$item->image") }}"   alt=""></a>
     					<div class="text text-center pt-4">
     						<h3><a href="#">{{ $item->name }}</a></h3>
     						<p>{{ $item->mota }}</p>
@@ -355,7 +355,7 @@
 							@foreach($danhmuc->sanphams->take(3) as $sp)
 								<div class="col-md-4 text-center mb-4">
 									<div class="menu-wrap">
-										<a href="{{ route('client.ctsp',['id'=>$sp->id]) }}"><img src="{{ url("/storage/uploads/$sp->image") }}"   alt=""></a>
+										<a href="{{ route('client.product.detail',['id'=>$sp->id]) }}"><img src="{{ url("/storage/uploads/$sp->image") }}"   alt=""></a>
 										<div class="text">
 											<h3><a href="#">{{ $sp->name }}</a></h3>
 											<p>{{ $sp->mota }}</p>
@@ -373,7 +373,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section img" id="ftco-testimony" style="background-image: url(images/bg_1.jpg);"  data-stellar-background-ratio="0.5">
+    <section class="ftco-section img" id="ftco-testimony" style="background-image: url('{{ asset('asset/images/bg_1.jpg') }}');"  data-stellar-background-ratio="0.5">
     	<div class="overlay"></div>
 	    <div class="container">
 	      <div class="row justify-content-center mb-5">
@@ -393,7 +393,7 @@
 	              </blockquote>
 	              <div class="author d-flex mt-4">
 	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_1.jpg" alt="">
+	                  <img src="url('{{ asset('asset/images/person.jpg') }}')" alt=""> 
 	                </div>
 	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
 	              </div>

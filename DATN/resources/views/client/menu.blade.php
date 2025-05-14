@@ -2,7 +2,7 @@
 @section('main')
 <section class="home-slider owl-carousel">
 
-      <div class="slider-item" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('{{ asset('asset/images/bg_3.jpg') }}');" data-stellar-background-ratio="0.5">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text justify-content-center align-items-center">
@@ -155,7 +155,7 @@
 								@foreach($danhmuc->sanphams as $sanpham)
 									<div class="col-md-4 text-center">
 										<div class="menu-wrap">
-											<a href="{{ route('client.ctsp',['id'=>$sanpham->id]) }}" class="menu-img img mb-4">
+											<a href="{{ route('client.product.detail',['id'=>$sanpham->id]) }}" class="menu-img img mb-4">
 												<img src="{{ url("/storage/uploads/$sanpham->image") }}" width="250px" alt="">
 											</a>
 											<div class="text">

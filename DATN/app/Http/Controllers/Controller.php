@@ -49,8 +49,5 @@ public function  showsp()
     return view('client.search', compact('sanpham', 'keyword'));
 }
 
-    public function ctsp($id) {
-        $sanpham = Sanphams::find($id);
-        return view('client.product-single',compact('sanpham'));
-    }
+
 }
