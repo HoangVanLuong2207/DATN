@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\sanpham;
-use App\Models\Danhmuc;
+
+use App\Models\Danhmucs;
+use App\Models\Sanphams;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,25 +17,25 @@ class Controller extends BaseController
     public function index(){
         return view('client.home');
     }
-   
+
 public function  danhmuc()
 {
-    $danhmucs = Danhmuc::with('sanphams')->get(); 
-    $sanpham = sanpham::take(4)->get();
+    $danhmucs = Danhmucs::with('sanphams')->get();
+    $sanpham = Sanphams::take(4)->get();
 
     return view('client.home', compact('danhmucs','sanpham'));
 }
 
 public function show()
 {
-    $danhmucs = Danhmuc::with('sanphams')->get();
+    $danhmucs = Danhmucs::with('sanphams')->get();
     return view('client.menu', compact('danhmucs'));
 }
 
 public function  showsp()
 {
-    $danhmucs = Danhmuc::with('sanphams')->get(); 
-    $sanpham = sanpham::take(4)->get();
+    $danhmucs = Danhmucs::with('sanphams')->get();
+    $sanpham = Sanphams::take(4)->get();
 
     return view('client.menu', compact('danhmucs','sanpham'));
 }
@@ -43,28 +44,10 @@ public function  showsp()
 {
     $keyword = $request->input('search');
 
-    $sanpham = sanpham::where('name', 'LIKE', '%' . $keyword . '%')->get();
+    $sanpham = Sanphams::where('name', 'LIKE', '%' . $keyword . '%')->get();
 
     return view('client.search', compact('sanpham', 'keyword'));
 }
-
-public function showProductDetail($id)
-{
-    $sanpham = sanpham::with([
-        'images.size',
-        'images.topping'
-    ])->findOrFail($id);
-
-    return view('client.product-single', compact('sanpham'));
-}
-
-
-public function addToCart(Request $request, $id)
-{
-    
-    return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng!');
-}
-
 
 
 }

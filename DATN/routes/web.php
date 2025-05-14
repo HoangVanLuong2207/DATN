@@ -1,89 +1,90 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ShowsanphamController;
+use App\Http\Controllers\admin\ContactAdminController;
 use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\DanhmucController;
 use App\Http\Controllers\admin\SanphamController;
-use App\Http\Controllers\admin\ProductImageController;
-use App\Http\Controllers\admin\ContactAdminController;
-use App\Http\Controllers\admin\SizeController;
-use App\Http\Controllers\admin\ToppingController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShowsanphamController;
+use Database\Seeders\SanphamSeeder;
+use Faker\Guesser\Name;
+use Illuminate\Support\Facades\Route;
 
-// Trang chủ Client
-Route::get('/', [Controller::class, 'index']);
-Route::get('/', [Controller::class, 'danhmuc'])->name('danhmuc.index');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/',[Controller::class,'index']);
+// Danh mục
+Route::group(
+    [
+        'namespace' => 'Backpack\CRUD\app\Http\Controllers',
+        'middleware' => config('backpack.base.web_middleware', 'web'),
+        'prefix' => config('backpack.base.route_prefix'),
+    ],
+    function () {
+        // if not otherwise configured, setup the auth routes
+        if (config('backpack.base.setup_auth_routes')) {
+            // Authentication Routes...
+            Route::get('login', 'Auth\LoginController@showLoginForm')->name('backpack.auth.login');
+            Route::post('login', 'Auth\LoginController@login');
+            Route::get('logout', 'Auth\LoginController@logout')->name('backpack.auth.logout');
+            Route::post('logout', 'Auth\LoginController@logout');
+
+            // Registration Routes...
+            Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('backpack.auth.register');
+            Route::post('register', 'Auth\RegisterController@register');
+
+            // if not otherwise configured, setup the password recovery routes
+            if (config('backpack.base.setup_password_recovery_routes', true)) {
+                Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
+                Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+                Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
+                Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email')->middleware('backpack.throttle.password.recovery:'.config('backpack.base.password_recovery_throttle_access'));
+            }
+
+            if (config('backpack.base.setup_email_verification_routes', false)) {
+                Route::get('email/verify', 'Auth\VerifyEmailController@emailVerificationRequired')->name('verification.notice');
+                Route::get('email/verify/{id}/{hash}', 'Auth\VerifyEmailController@verifyEmail')->name('verification.verify');
+                Route::post('email/verification-notification', 'Auth\VerifyEmailController@resendVerificationEmail')->name('verification.send');
+            }
+        }
+
+        // if not otherwise configured, setup the dashboard routes
+        if (config('backpack.base.setup_dashboard_routes')) {
+            Route::get('dashboard', 'AdminController@dashboard')->name('backpack.dashboard');
+            Route::get('/', 'AdminController@redirect')->name('backpack');
+        }
+
+        // if not otherwise configured, setup the "my account" routes
+        if (config('backpack.base.setup_my_account_routes')) {
+            Route::get('edit-account-info', 'MyAccountController@getAccountInfoForm')->name('backpack.account.info');
+            Route::post('edit-account-info', 'MyAccountController@postAccountInfoForm')->name('backpack.account.info.store');
+            Route::post('change-password', 'MyAccountController@postChangePasswordForm')->name('backpack.account.password');
+        }
+    });
+// Client
+Route::get('/',[Controller::class,'danhmuc'])->name('danhmuc.index');
 Route::get('/menu', [Controller::class, 'show'])->name('client.menu');
-Route::get('/menu', [Controller::class, 'showsp'])->name('client.showsp'); 
-Route::get('/product/{id}', [Controller::class, 'showProductDetail'])->name('client.product.detail');
-Route::post('/add-to-cart/{id}', [Controller::class, 'addToCart'])->name('cart.add');
+Route::get('/menu',[Controller::class,'showsp'])->name('client.showsp');
+Route::get('/product-single/{id}',[Controller::class,'ctsp'])->name('client.ctsp');
+
+
+
+// Contact
+Route::get('/contact/create',[ContactController::class,'create'])->name('contact.create');
+Route::post('/contact/store',[ContactController::class,'store'])->name('contact.store');
+Route::get('/admin/contact',[ContactAdminController::class,'index'])->name('contact.index');
+Route::get('/admin/contact/delete/{id}',[ContactAdminController::class,'delete'])->name('contact.delete');
 
 // Search
 Route::get('/search', [Controller::class, 'search'])->name('search');
-
-// Liên hệ từ Client
-Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
-
-// Group Admin Route
-Route::prefix('admin')->group(function () {
-    // Trang chủ Admin
-    Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
-    // Danh mục
-    Route::prefix('danhmuc')->group(function () {
-        Route::get('/', [DanhmucController::class, 'index'])->name('danhmuc.index');
-        Route::get('/create', [DanhmucController::class, 'create'])->name('danhmuc.create');
-        Route::post('/store', [DanhmucController::class, 'store'])->name('danhmuc.store');
-        Route::get('/edit/{id}', [DanhmucController::class, 'edit'])->name('danhmuc.edit');
-        Route::post('/update/{id}', [DanhmucController::class, 'update'])->name('danhmuc.update');
-        Route::get('/delete/{id}', [DanhmucController::class, 'delete'])->name('danhmuc.delete');
-    });
-
-    // Sản phẩm
-    Route::prefix('sanpham')->group(function () {
-        Route::get('/', [SanphamController::class, 'index'])->name('sanpham.index');
-        Route::get('/create', [SanphamController::class, 'create'])->name('sanpham.create');
-        Route::post('/store', [SanphamController::class, 'store'])->name('sanpham.store');
-        Route::get('/edit/{id}', [SanphamController::class, 'edit'])->name('sanpham.edit');
-        Route::post('/update/{id}', [SanphamController::class, 'update'])->name('sanpham.update');
-        Route::get('/delete/{id}', [SanphamController::class, 'delete'])->name('sanpham.delete');
-    });
-
-    // Ảnh sản phẩm (biến thể)
-    Route::prefix('product-images')->group(function () {
-        Route::get('/index', [ProductImageController::class, 'index'])->name('product-images.index');
-        Route::get('/create', [ProductImageController::class, 'create'])->name('product-images.create');
-        Route::post('/', [ProductImageController::class, 'store'])->name('product-images.store');
-    });
-
-    // Quản lý liên hệ từ Admin
-    Route::prefix('contact')->group(function () {
-        Route::get('/', [ContactAdminController::class, 'index'])->name('contact.index');
-        Route::get('/delete/{id}', [ContactAdminController::class, 'delete'])->name('contact.delete');
-    });
-
-    // Topping 
-     Route::prefix('topping')->group(function () {
-        Route::get('/', [ToppingController::class, 'index'])->name('topping.index');
-        Route::get('/create', [ToppingController::class, 'create'])->name('topping.create');
-        Route::post('/store', [ToppingController::class, 'store'])->name('topping.store');
-        Route::get('/edit/{id}', [ToppingController::class, 'edit'])->name('topping.edit');
-        Route::post('/update/{id}', [ToppingController::class, 'update'])->name('topping.update');
-        Route::get('/delete/{id}', [ToppingController::class, 'delete'])->name('topping.delete');
-    });
-
-    
-    // Size
-     Route::prefix('size')->group(function () {
-        Route::get('/', [SizeController::class, 'index'])->name('size.index');
-        Route::get('/create', [SizeController::class, 'create'])->name('size.create');
-        Route::post('/store', [SizeController::class, 'store'])->name('size.store');
-        Route::get('/edit/{id}', [SizeController::class, 'edit'])->name('size.edit');
-        Route::post('/update/{id}', [SizeController::class, 'update'])->name('size.update');
-        Route::get('/delete/{id}', [SizeController::class, 'delete'])->name('size.delete');
-    });
-});
