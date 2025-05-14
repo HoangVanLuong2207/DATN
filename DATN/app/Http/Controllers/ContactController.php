@@ -24,4 +24,5 @@ class ContactController extends Controller
     ]);
         return redirect()->route('contact.create')->with('success', 'Thêm thành công!');
     }
+   
 }
