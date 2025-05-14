@@ -14,6 +14,6 @@ class ContactAdminController extends Controller
     }
     public function delete($id) {
         Contact::destroy($id);
-        return redirect()->route('contact.index')->with('success', 'Xóa thành công!');
+        return redirect()->route('contact.index');
     }
 }

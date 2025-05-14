@@ -15,11 +15,6 @@
         </a>
       </header>
       <div class="card-content">
-         @if (session('success'))
-				<div style="color: green; background-color: #e6ffe6; padding: 10px; margin-bottom: 10px;">
-					{{ session('success') }}
-				</div>
-			@endif
         <table>
           <thead>
           <tr>

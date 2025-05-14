@@ -9,5 +9,4 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Cart_detail extends Model
 {
     use HasFactory;
-    protected $table = 'cart_detail';
 }
