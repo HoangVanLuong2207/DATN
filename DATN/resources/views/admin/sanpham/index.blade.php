@@ -25,7 +25,6 @@
               </label>
             </th>
             <th class="image-cell"></th>
-            <!-- <th>Id sản phẩm</th> -->
             <th>Tên sản phẩm</th>
             <th>Giá</th>
             <th>Ảnh sản phẩm</th>
@@ -45,7 +44,6 @@
             </td>
             <td class="image-cell">
             </td>
-            <!-- <td data-label="Name">{{ $item['id'] }}</td> -->
             <td data-label="Company">{{ $item['name'] }}</td>
             <td data-label="Company">{{ number_format($item['price']) }} VND</td>
             <td data-label="Company"><img src="{{ url("/storage/uploads/$item->image") }}"  width="100px" alt=""></td>

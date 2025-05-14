@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\ContactAdminController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\admin\DanhmucController;
+use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\SanphamController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
@@ -41,11 +42,21 @@ Route::get('/admin/sanpham/edit/{id}',[SanphamController::class, 'edit'])->name(
 Route::post('/admin/sanpham/update/{id}',[SanphamController::class, 'update'])->name('sanpham.update');
 Route::get('/admin/sanpham/delete/{id}',[SanphamController::class, 'delete'])->name('sanpham.delete');
 
+// Image biến thể
+Route::get('/product-images/index', [ProductImageController::class, 'index'])->name('product-images.index');
+Route::get('/product-images/create', [ProductImageController::class, 'create'])->name('product-images.create');
+Route::post('/product-images', [ProductImageController::class, 'store'])->name('product-images.store');
+
+
 // Client
 Route::get('/',[Controller::class,'danhmuc'])->name('danhmuc.index');
 Route::get('/menu', [Controller::class, 'show'])->name('client.menu');
 Route::get('/menu',[Controller::class,'showsp'])->name('client.showsp');
-Route::get('/product-single/{id}',[Controller::class,'ctsp'])->name('client.ctsp');
+Route::get('/product/{id}', [Controller::class, 'showProductDetail'])->name('client.product.detail');
+Route::post('/add-to-cart/{id}', [Controller::class, 'addToCart'])->name('cart.add');
+
+
+
 
 
 
@@ -57,3 +68,6 @@ Route::get('/admin/contact/delete/{id}',[ContactAdminController::class,'delete']
 
 // Search 
 Route::get('/search', [Controller::class, 'search'])->name('search');
+
+
+

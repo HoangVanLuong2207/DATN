@@ -17,7 +17,7 @@ class SanphamController extends Controller
      */
     public function index()
     {
-        $sanpham = Sanpham::with('danhmuc')->paginate(2);
+        $sanpham = Sanpham::with('danhmuc')->paginate(5);
         return view('admin.sanpham.index', ['sanpham' => $sanpham]);
     }
 

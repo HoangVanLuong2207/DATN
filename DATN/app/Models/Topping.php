@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Prodcut_images extends Model
+class Topping extends Model
 {
     use HasFactory;
+    protected $table = 'topping';
+
 }

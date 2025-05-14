@@ -1,7 +1,6 @@
 @extends('layout')
 @section('main')
 <section class="home-slider owl-carousel">
-
 <div class="slider-item" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
   <div class="container">
@@ -11,7 +10,6 @@
           <h1 class="mb-3 mt-5 bread">Product Detail</h1>
           <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Product Detail</span></p>
       </div>
-
     </div>
   </div>
 </div>
@@ -20,23 +18,76 @@
 <section class="ftco-section">
   <div class="container">
       <div class="row">
-          <div class="col-lg-6 mb-5 ftco-animate">
-              <a href="" class="image-popup"><img class="img-fluid" alt="Colorlib Template" src="{{ url("/storage/uploads/$sanpham->image") }}"> </a> 
-          </div>
+        <div class="col-lg-6 mb-5 ftco-animate">
+      <div class="product-image text-center mb-4">
+          <img id="mainImage"
+              src="{{ asset('storage/uploads/' . $sanpham->image) }}"
+              class="img-fluid rounded border"
+              style="max-height: 400px;">
+      </div>
+      <div id="variantThumbnails" class="variant-thumbnails d-flex justify-content-center flex-wrap mb-4">
+          @foreach ($sanpham->images as $img)
+              <img src="{{ asset('storage/' . $img->image_url) }}"
+                  data-id="{{ $img->id }}"
+                  class="variant-thumbnail m-2 border rounded"
+                  style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+          @endforeach
+      </div>
+      <script>
+          const mainImage = document.getElementById('mainImage');
+          const originalImageSrc = mainImage.src;
+          document.querySelectorAll('.variant-thumbnail').forEach(img => {
+              img.addEventListener('click', function () {
+                  const currentMain = mainImage.src;
+                  const existingOriginal = document.querySelector('.variant-thumbnail[data-origin="true"]');
+                  if (currentMain === originalImageSrc && !existingOriginal) {
+                      const thumbContainer = document.getElementById('variantThumbnails');
+                      const oldImg = document.createElement('img');
+                      oldImg.src = originalImageSrc;
+                      oldImg.setAttribute('data-origin', 'true');
+                      oldImg.className = 'variant-thumbnail m-2 border rounded';
+                      oldImg.style.width = '80px';
+                      oldImg.style.height = '80px';
+                      oldImg.style.objectFit = 'cover';
+                      oldImg.style.cursor = 'pointer';
+                      oldImg.addEventListener('click', function () {
+                          mainImage.src = this.src;
+                      });
+                      thumbContainer.appendChild(oldImg);
+                  }
+                  mainImage.src = this.src;
+              });
+          });
+      </script>
+        </div>
           <div class="col-lg-6 product-details pl-md-5 ftco-animate">
               <h3>{{ $sanpham['name'] }}</h3>
               <p class="price"><span>{{ number_format($sanpham['price'] ) }} VND</span></p>
               <p>{{ $sanpham['mota'] }}</p>
                   <div class="row mt-4">
                       <div class="col-md-6">
-                          <div class="form-group d-flex">
+                  <div class="form-group d-flex">
                 <div class="select-wrap">
                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                <select name="" id="" class="form-control">
-                    <option value="">Small</option>
-                  <option value="">Medium</option>
-                  <option value="">Large</option>
-                  <option value="">Extra Large</option>
+               <select name="topping_id" class="form-control">
+                <option value="">Chọn topping</option>
+                @foreach ($sanpham->images as $img)
+                    @if ($img->topping)
+                        <option value="{{ $img->id }}">
+                            {{ $img->topping->name }} - {{ number_format($img->topping->price) }} VND
+                        </option>
+                    @endif
+                @endforeach
+                </select>
+              <select name="size_id" class="form-control">
+                    <option value="">Chọn size</option>
+                    @foreach ($sanpham->images as $img)
+                        @if ($img->size)
+                            <option value="{{ $img->id }}">
+                                {{ $img->size->name }} - {{ number_format($img->size->price) }} VND
+                            </option>
+                        @endif
+                    @endforeach
                 </select>
               </div>
               </div>

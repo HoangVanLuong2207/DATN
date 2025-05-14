@@ -170,6 +170,12 @@
           <span class="menu-item-label">Contact</span>
         </a>
       </li>
+      <li class="--set-active-profile-html">
+        <a href="/admin/contact">
+          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+          <span class="menu-item-label">Contact</span>
+        </a>
+      </li>
       <li>
         <a href="login.html">
           <span class="icon"><i class="mdi mdi-lock"></i></span>

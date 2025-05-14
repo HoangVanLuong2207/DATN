@@ -155,7 +155,7 @@
 								@foreach($danhmuc->sanphams as $sanpham)
 									<div class="col-md-4 text-center">
 										<div class="menu-wrap">
-											<a href="{{ route('client.ctsp',['id'=>$sanpham->id]) }}" class="menu-img img mb-4">
+											<a href="{{ route('client.product.detail',['id'=>$sanpham->id]) }}" class="menu-img img mb-4">
 												<img src="{{ url("/storage/uploads/$sanpham->image") }}" width="250px" alt="">
 											</a>
 											<div class="text">

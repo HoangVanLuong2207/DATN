@@ -10,9 +10,15 @@ class sanpham extends Model
 {
     use HasFactory;
     use SoftDeletes;
+     protected $table = 'sanphams';
     public function danhmuc()
 {
     return $this->belongsTo(Danhmuc::class, 'id_danhmuc');
 }
+public function images()
+{
+    return $this->hasMany(ProductImage::class, 'product_id');
+}
+
 
 }

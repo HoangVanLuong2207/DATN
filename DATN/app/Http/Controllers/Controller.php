@@ -48,8 +48,24 @@ public function  showsp()
     return view('client.search', compact('sanpham', 'keyword'));
 }
 
-    public function ctsp($id) {
-        $sanpham = sanpham::find($id);
-        return view('client.product-single',compact('sanpham'));
-    } 
+public function showProductDetail($id)
+{
+    $sanpham = sanpham::with([
+        'images.size',
+        'images.topping'
+    ])->findOrFail($id);
+
+    return view('client.product-single', compact('sanpham'));
+}
+
+
+public function addToCart(Request $request, $id)
+{
+    // Xử lý thêm vào giỏ hàng tại đây (giả định bạn có logic xử lý rồi)
+    
+    return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng!');
+}
+
+
+
 }
