@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('topping', function (Blueprint $table) {
+        Schema::create('product_attrlbutes', function (Blueprint $table) {
         $table->id();
-        $table->string('name',255);
-        $table->decimal('price',10,2);
+        $table->foreignId('product_id')->constrained('products');
+        $table->foreignId('attrlbutes_id')->constrained('attrlbutes_id');
         $table->timestamps();
     });
     }

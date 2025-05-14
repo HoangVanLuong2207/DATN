@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('size', function (Blueprint $table) {
+        Schema::create('attrlbutee', function (Blueprint $table) {
         $table->id();
         $table->string('name',255);
-        $table->decimal('price',10,2);
+        $table->string('value',255);
         $table->timestamps();
     });
     }
