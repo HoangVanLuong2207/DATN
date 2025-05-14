@@ -17,7 +17,7 @@ use App\Http\Controllers\admin\ToppingController;
 Route::get('/', [Controller::class, 'index']);
 Route::get('/', [Controller::class, 'danhmuc'])->name('danhmuc.index');
 Route::get('/menu', [Controller::class, 'show'])->name('client.menu');
-Route::get('/menu', [Controller::class, 'showsp'])->name('client.showsp'); // ⚠️ Lưu ý: hai route cùng '/menu'
+Route::get('/menu', [Controller::class, 'showsp'])->name('client.showsp'); 
 Route::get('/product/{id}', [Controller::class, 'showProductDetail'])->name('client.product.detail');
 Route::post('/add-to-cart/{id}', [Controller::class, 'addToCart'])->name('cart.add');
 
