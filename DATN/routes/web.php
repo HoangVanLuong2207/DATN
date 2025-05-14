@@ -25,22 +25,53 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[Controller::class,'index']);
 // Danh mục
-// Route::get('/admin',[HomeController::class, 'index'])->name('home.index');
-// Route::get('/admin/danhmuc',[DanhmucController::class,'index'])->name('danhmuc.index');
-// Route::get('/admin/danhmuc/create',[DanhmucController::class,'create'])->name('danhmuc.create');
-// Route::post('/admin/danhmuc/store',[DanhmucController::class,'store'])->name('danhmuc.store');
-// Route::get('/admin/danhmuc/delete/{id}',[DanhmucController::class,'delete'])->name('danhmuc.delete');
-// Route::get('/admin/danhmuc/edit/{id}',[DanhmucController::class,'edit'])->name('danhmuc.edit');
-// Route::post('/admin/danhmuc/update/{id}',[DanhmucController::class,'update'])->name('danhmuc.update');
+Route::group(
+    [
+        'namespace' => 'Backpack\CRUD\app\Http\Controllers',
+        'middleware' => config('backpack.base.web_middleware', 'web'),
+        'prefix' => config('backpack.base.route_prefix'),
+    ],
+    function () {
+        // if not otherwise configured, setup the auth routes
+        if (config('backpack.base.setup_auth_routes')) {
+            // Authentication Routes...
+            Route::get('login', 'Auth\LoginController@showLoginForm')->name('backpack.auth.login');
+            Route::post('login', 'Auth\LoginController@login');
+            Route::get('logout', 'Auth\LoginController@logout')->name('backpack.auth.logout');
+            Route::post('logout', 'Auth\LoginController@logout');
 
-// // Sản phẩm
-// Route::get('/admin/sanpham',[SanphamController::class,'index'])->name('sanpham.index');
-// Route::get('/admin/sanpham/create', [SanphamController::class, 'create'])->name('sanpham.create');
-// Route::post('/admin/sanpham/store', [SanphamController::class, 'store'])->name('sanpham.store');
-// Route::get('/admin/sanpham/edit/{id}',[SanphamController::class, 'edit'])->name('sanpham.edit');
-// Route::post('/admin/sanpham/update/{id}',[SanphamController::class, 'update'])->name('sanpham.update');
-// Route::get('/admin/sanpham/delete/{id}',[SanphamController::class, 'delete'])->name('sanpham.delete');
+            // Registration Routes...
+            Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('backpack.auth.register');
+            Route::post('register', 'Auth\RegisterController@register');
 
+            // if not otherwise configured, setup the password recovery routes
+            if (config('backpack.base.setup_password_recovery_routes', true)) {
+                Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
+                Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+                Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
+                Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email')->middleware('backpack.throttle.password.recovery:'.config('backpack.base.password_recovery_throttle_access'));
+            }
+
+            if (config('backpack.base.setup_email_verification_routes', false)) {
+                Route::get('email/verify', 'Auth\VerifyEmailController@emailVerificationRequired')->name('verification.notice');
+                Route::get('email/verify/{id}/{hash}', 'Auth\VerifyEmailController@verifyEmail')->name('verification.verify');
+                Route::post('email/verification-notification', 'Auth\VerifyEmailController@resendVerificationEmail')->name('verification.send');
+            }
+        }
+
+        // if not otherwise configured, setup the dashboard routes
+        if (config('backpack.base.setup_dashboard_routes')) {
+            Route::get('dashboard', 'AdminController@dashboard')->name('backpack.dashboard');
+            Route::get('/', 'AdminController@redirect')->name('backpack');
+        }
+
+        // if not otherwise configured, setup the "my account" routes
+        if (config('backpack.base.setup_my_account_routes')) {
+            Route::get('edit-account-info', 'MyAccountController@getAccountInfoForm')->name('backpack.account.info');
+            Route::post('edit-account-info', 'MyAccountController@postAccountInfoForm')->name('backpack.account.info.store');
+            Route::post('change-password', 'MyAccountController@postChangePasswordForm')->name('backpack.account.password');
+        }
+    });
 // Client
 Route::get('/',[Controller::class,'danhmuc'])->name('danhmuc.index');
 Route::get('/menu', [Controller::class, 'show'])->name('client.menu');

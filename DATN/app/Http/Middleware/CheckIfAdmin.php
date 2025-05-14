@@ -27,8 +27,8 @@ class CheckIfAdmin
      */
     private function checkIfUserIsAdmin($user)
     {
-        // return ($user->is_admin == 1);
-        return true;
+        return ($user->role == 0);
+
     }
 
     /**
@@ -59,9 +59,17 @@ class CheckIfAdmin
             return $this->respondToUnauthorizedRequest($request);
         }
 
-        if (! $this->checkIfUserIsAdmin(backpack_user())) {
-            return $this->respondToUnauthorizedRequest($request);
-        }
+       if (! $this->checkIfUserIsAdmin(backpack_user())) {
+    backpack_auth()->logout();
+    echo "
+    <script>
+    var errorMessage = 'Bạn không có quyền truy cập trang Admin';
+    if (confirm(errorMessage)) {
+        window.location.href = '/login';
+    }
+    </script>
+    ";
+}
 
         return $next($request);
     }
