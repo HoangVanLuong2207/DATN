@@ -43,9 +43,9 @@ Route::post('/admin/sanpham/update/{id}',[SanphamController::class, 'update'])->
 Route::get('/admin/sanpham/delete/{id}',[SanphamController::class, 'delete'])->name('sanpham.delete');
 
 // Image biến thể
-Route::get('/product-images/index', [ProductImageController::class, 'index'])->name('product-images.index');
-Route::get('/product-images/create', [ProductImageController::class, 'create'])->name('product-images.create');
-Route::post('/product-images', [ProductImageController::class, 'store'])->name('product-images.store');
+Route::get('/admin/product-images/index', [ProductImageController::class, 'index'])->name('product-images.index');
+Route::get('/admin//product-images/create', [ProductImageController::class, 'create'])->name('product-images.create');
+Route::post('/admin//product-images', [ProductImageController::class, 'store'])->name('product-images.store');
 
 
 // Client

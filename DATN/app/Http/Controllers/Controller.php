@@ -61,7 +61,7 @@ public function showProductDetail($id)
 
 public function addToCart(Request $request, $id)
 {
-    // Xử lý thêm vào giỏ hàng tại đây (giả định bạn có logic xử lý rồi)
+    
     
     return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng!');
 }

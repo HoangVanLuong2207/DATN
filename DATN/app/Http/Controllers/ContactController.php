@@ -22,6 +22,6 @@ class ContactController extends Controller
         'email' => $request->email,
         'massage' => $request->massage,
     ]);
-        return redirect()->route('contact.create');
+        return redirect()->route('contact.create')->with('success', 'Thêm thành công!');
     }
 }

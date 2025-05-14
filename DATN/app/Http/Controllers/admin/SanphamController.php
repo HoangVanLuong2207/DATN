@@ -56,7 +56,7 @@ class SanphamController extends Controller
             'mota' => $mota,
             'id_danhmuc' => $id_danhmuc,
         ]);
-        return redirect()->route('sanpham.index');
+        return redirect()->route('sanpham.index')->with('success', 'Thêm thành công!');
     }
 
     /**
@@ -110,7 +110,7 @@ class SanphamController extends Controller
         Storage::delete('public/uploads/' . $sanpham->image);
     }
     $sanpham->delete();
-    return redirect()->route('sanpham.index')->with('success', 'Đã xóa sản phẩm và ảnh!');
+    return redirect()->route('sanpham.index')->with('success', 'Đã xóa sản phẩm!');
     }
 
 }

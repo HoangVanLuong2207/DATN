@@ -43,7 +43,7 @@
                 <div class="control">
                 <div class="select">
                     <label>Chọn Topping (nếu có):</label>
-                    <select name="size_id" required>
+                    <select name="topping_id" required>
                     <option value="">-- Chọn Topping --</option>
                     <option value="">Không có</option>
                     @foreach($toppings as $topping)

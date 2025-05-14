@@ -171,9 +171,9 @@
         </a>
       </li>
       <li class="--set-active-profile-html">
-        <a href="/admin/contact">
+        <a href="/admin/product-images/index">
           <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-          <span class="menu-item-label">Contact</span>
+          <span class="menu-item-label">Biến thể</span>
         </a>
       </li>
       <li>

@@ -36,7 +36,7 @@ public function store(Request $request)
         'is_primary' => $request->has('is_primary'),
     ]);
 
-    return redirect()->back()->with('success', 'Thêm ảnh thành công!');
+    return redirect()->route('product-images.index')->with('success', 'Thêm ảnh thành công!');
 }
 
 }

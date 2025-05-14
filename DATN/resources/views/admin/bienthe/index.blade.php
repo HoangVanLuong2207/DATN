@@ -4,17 +4,12 @@
 </div>
 
 <div class="card has-table">
-  <header class="card-header">
-    <p class="card-header-title">
-      <span class="icon"><i class="mdi mdi-image"></i></span>
-      Ảnh sản phẩm
-    </p>
-    <a href="{{ route('product-images.index') }}" class="card-header-icon">
-      <span class="icon"><i class="mdi mdi-reload"></i></span>
-    </a>
-  </header>
-
   <div class="card-content">
+         @if (session('success'))
+				<div style="color: green; background-color: #e6ffe6; padding: 10px; margin-bottom: 10px;">
+					{{ session('success') }}
+				</div>
+			@endif
     <table>
       <thead>
         <tr>
@@ -40,7 +35,7 @@
             <a href="#" class="button small blue">
               <span class="icon"><i class="mdi mdi-pencil"></i></span>
             </a>
-            <a href="#" onclick="return confirm('Bạn có chắc muốn xóa ảnh này?')" class="button small red">
+            <a href="" onclick="return confirm('Bạn có chắc muốn xóa ảnh này?')" class="button small red">
               <span class="icon"><i class="mdi mdi-trash-can"></i></span>
             </a>
           </td>

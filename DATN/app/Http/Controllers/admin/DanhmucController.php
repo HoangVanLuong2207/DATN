@@ -40,7 +40,7 @@ class DanhmucController extends Controller
         Danhmuc::insert([
             'name' => $name,
         ]);
-        return redirect()->route('danhmuc.index');
+        return redirect()->route('danhmuc.index')->with('success', 'Thêm thành công!');
     }
 
     /**
@@ -68,7 +68,7 @@ class DanhmucController extends Controller
         Danhmuc::where('id', $id)->update([
             'name' => $name
         ]);
-        return redirect()->route('danhmuc.index');
+        return redirect()->route('danhmuc.index')->with('success', 'Sửa thành công!');
     }
 
     /**
@@ -77,6 +77,6 @@ class DanhmucController extends Controller
     public function delete($id)
     {
         Danhmuc::destroy($id);
-        return redirect()->route('danhmuc.index');
+        return redirect()->route('danhmuc.index')->with('success', 'Xóa thành công!');
     }
 }
