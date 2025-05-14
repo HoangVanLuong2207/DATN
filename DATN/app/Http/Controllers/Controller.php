@@ -62,7 +62,6 @@ public function showProductDetail($id)
 public function addToCart(Request $request, $id)
 {
     
-    
     return redirect()->back()->with('success', 'Đã thêm vào giỏ hàng!');
 }
 

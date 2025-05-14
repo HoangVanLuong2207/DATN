@@ -10,6 +10,8 @@ use App\Http\Controllers\admin\DanhmucController;
 use App\Http\Controllers\admin\SanphamController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\ContactAdminController;
+use App\Http\Controllers\admin\SizeController;
+use App\Http\Controllers\admin\ToppingController;
 
 // Trang chủ Client
 Route::get('/', [Controller::class, 'index']);
@@ -62,5 +64,26 @@ Route::prefix('admin')->group(function () {
     Route::prefix('contact')->group(function () {
         Route::get('/', [ContactAdminController::class, 'index'])->name('contact.index');
         Route::get('/delete/{id}', [ContactAdminController::class, 'delete'])->name('contact.delete');
+    });
+
+    // Topping 
+     Route::prefix('topping')->group(function () {
+        Route::get('/', [ToppingController::class, 'index'])->name('topping.index');
+        Route::get('/create', [ToppingController::class, 'create'])->name('topping.create');
+        Route::post('/store', [ToppingController::class, 'store'])->name('topping.store');
+        Route::get('/edit/{id}', [ToppingController::class, 'edit'])->name('topping.edit');
+        Route::post('/update/{id}', [ToppingController::class, 'update'])->name('topping.update');
+        Route::get('/delete/{id}', [ToppingController::class, 'delete'])->name('topping.delete');
+    });
+
+    
+    // Size
+     Route::prefix('size')->group(function () {
+        Route::get('/', [SizeController::class, 'index'])->name('size.index');
+        Route::get('/create', [SizeController::class, 'create'])->name('size.create');
+        Route::post('/store', [SizeController::class, 'store'])->name('size.store');
+        Route::get('/edit/{id}', [SizeController::class, 'edit'])->name('size.edit');
+        Route::post('/update/{id}', [SizeController::class, 'update'])->name('size.update');
+        Route::get('/delete/{id}', [SizeController::class, 'delete'])->name('size.delete');
     });
 });

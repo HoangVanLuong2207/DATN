@@ -176,6 +176,18 @@
           <span class="menu-item-label">Biến thể</span>
         </a>
       </li>
+       <li class="--set-active-profile-html">
+        <a href="/admin/topping">
+          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+          <span class="menu-item-label">Topping</span>
+        </a>
+      </li>
+       <li class="--set-active-profile-html">
+        <a href="/admin/size">
+          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+          <span class="menu-item-label">Size</span>
+        </a>
+      </li>
       <li>
         <a href="login.html">
           <span class="icon"><i class="mdi mdi-lock"></i></span>

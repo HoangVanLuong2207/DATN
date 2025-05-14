@@ -65,9 +65,9 @@
 	      </div>
 		  </div>
 	  </nav>
-
+  
       @yield('main')
-
+  
       <footer class="ftco-footer ftco-section img">
     	<div class="overlay"></div>
       <div class="container">
