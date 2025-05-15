@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\SanphamController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShowsanphamController;
+use App\Http\Controllers\AuthenticationController;
 use Database\Seeders\SanphamSeeder;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
@@ -88,3 +89,9 @@ Route::get('/admin/contact/delete/{id}',[ContactAdminController::class,'delete']
 
 // Search
 Route::get('/search', [Controller::class, 'search'])->name('search');
+
+Route::get('login', [AuthenticationController::class, 'showLoginForm'])->name('login');
+Route::post('post-login', [AuthenticationController::class, 'postLogin'])->name('postLogin');
+Route::get('logout', [AuthenticationController::class, 'logout'])->name('logout');
+Route::get('register', [AuthenticationController::class, 'showRegisterForm'])->name('register');
+Route::post('post-register', [AuthenticationController::class, 'postRegister'])->name('postRegister');
