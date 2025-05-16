@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Backpack\Basset\BassetServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

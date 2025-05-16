@@ -2,7 +2,7 @@
 @section('main')
 <section class="home-slider owl-carousel">
 
-      <div class="slider-item" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('{{ asset('asset/images/bg_2.jpg') }}');" data-stellar-background-ratio="0.5">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text justify-content-center align-items-center">
@@ -18,7 +18,7 @@
     </section>
 
     <section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url(images/about.jpg);"></div>
+    	<div class="one-half img" style="background-image: url('{{ asset('asset/images/about.jpg') }}');"></div>
     	<div class="one-half ftco-animate">
     		<div class="overlap">
 	        <div class="heading-section ftco-animate ">
@@ -32,7 +32,7 @@
     	</div>
     </section>
 
-    <section class="ftco-section img" id="ftco-testimony" style="background-image: url(images/bg_1.jpg);"  data-stellar-background-ratio="0.5">
+    <section class="ftco-section img" id="ftco-testimony" style="background-image: url('{{ asset('asset/images/bg_1.jpg') }}');"  data-stellar-background-ratio="0.5">
     	<div class="overlay"></div>
 	    <div class="container">
 	      <div class="row justify-content-center mb-5">
@@ -129,22 +129,22 @@
     				<div class="row">
     					<div class="col-md-6">
     						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-1.jpg') }}');"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-2.jpg') }}');"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-3.jpg') }}');"></a>
 		    				</div>
     					</div>
     					<div class="col-md-6">
     						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
+		    					<a href="#" class="img" style="background-image: url('{{ asset('asset/images/menu-4.jpg') }}');"></a>
 		    				</div>
     					</div>
     				</div>
@@ -153,7 +153,7 @@
     	</div>
     </section>
 
-    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url(images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url('{{ asset('asset/images/bg_2.jpg') }}');" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
       <div class="container">
         <div class="row justify-content-center">

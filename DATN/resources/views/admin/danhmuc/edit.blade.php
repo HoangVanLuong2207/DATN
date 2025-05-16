@@ -32,11 +32,6 @@
             </div>
           </div>
         </form>
-        <!-- <div class="control">
-              <button type="reset" class="button red">
-                <a href="/admin/danhmuc/create">Reset</a>
-              </button>
-        </div> -->
       </div>
     </div>
   </section>

@@ -106,7 +106,7 @@
                             </button>
                         </div>
                         <div class="control">
-                            <a href="index.html" class="button">
+                            <a href="/" class="button">
                                 Back
                             </a>
                         </div>

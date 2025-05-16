@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Danhmucs;
-use App\Models\Sanphams;
+use App\Models\sanpham;
+use App\Models\Danhmuc;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,40 +16,26 @@ class Controller extends BaseController
     public function index(){
         return view('client.home');
     }
-
 public function  danhmuc()
 {
-    $danhmucs = Danhmucs::with('sanphams')->get();
-    $sanpham = Sanphams::take(4)->get();
-
+    $danhmucs = Danhmuc::with('sanphams')->get(); 
+    $sanpham = sanpham::take(4)->get();
     return view('client.home', compact('danhmucs','sanpham'));
 }
-
 public function show()
 {
-    $danhmucs = Danhmucs::with('sanphams')->get();
+    $danhmucs = Danhmuc::with('sanphams')->get();
     return view('client.menu', compact('danhmucs'));
 }
-
 public function  showsp()
 {
-    $danhmucs = Danhmucs::with('sanphams')->get();
-    $sanpham = Sanphams::take(4)->get();
-
+    $danhmucs = Danhmuc::with('sanphams')->get(); 
+    $sanpham = sanpham::take(4)->get();
     return view('client.menu', compact('danhmucs','sanpham'));
 }
-
-    public function search(Request $request)
-{
+    public function search(Request $request){
     $keyword = $request->input('search');
-
-    $sanpham = Sanphams::where('name', 'LIKE', '%' . $keyword . '%')->get();
-
+    $sanpham = sanpham::where('name', 'LIKE', '%' . $keyword . '%')->get();
     return view('client.search', compact('sanpham', 'keyword'));
 }
-
-    public function ctsp($id) {
-        $sanpham = Sanphams::find($id);
-        return view('client.product-single',compact('sanpham'));
-    }
 }

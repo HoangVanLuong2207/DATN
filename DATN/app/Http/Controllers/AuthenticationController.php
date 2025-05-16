@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
             'password' => 'required'
         ]);
         if (Auth::attempt($data)) {
-            return redirect()->route('danhmuc.index');
+            return redirect()->route('danhmuc1.index');
         }else{
             return redirect()->back()->with([
                 'message' => 'Email hoặc mật khẩu không đúng!'
@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('danhmuc.index');
+        return redirect()->route('danhmuc1.index');
     }
     public function showRegisterForm()
     {

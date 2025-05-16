@@ -2,7 +2,7 @@
 @section('main')
 <section class="home-slider owl-carousel">
 
-      <div class="slider-item" style="background-image: url(images/bg_3.jpg);" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('{{ asset('asset/images/bg_1.jpg') }}');" data-stellar-background-ratio="0.5">
       	<div class="overlay"></div>
         <div class="container">
           <div class="row slider-text justify-content-center align-items-center">
@@ -40,7 +40,13 @@
 						</div>
 					</div>
 					<div class="col-md-1"></div>
+
           <div class="col-md-6 ftco-animate">
+			@if (session('success'))
+				<div style="color: green; background-color: #e6ffe6; padding: 10px; margin-bottom: 10px;">
+					{{ session('success') }}
+				</div>
+			@endif
             <form action="{{ route('contact.store') }}" method="post" class="contact-form">
               @csrf
             	<div class="row">

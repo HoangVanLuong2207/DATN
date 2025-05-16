@@ -15,6 +15,11 @@
         </a>
       </header>
       <div class="card-content">
+         @if (session('success'))
+				<div style="color: green; background-color: #e6ffe6; padding: 10px; margin-bottom: 10px;">
+					{{ session('success') }}
+				</div>
+			@endif
         <table>
           <thead>
           <tr>
@@ -56,15 +61,19 @@
             @endforeach
           </tbody>
         </table>
-        <div class="table-pagination">
+         <div class="table-pagination mt-4">
           <div class="flex items-center justify-between">
             <div class="buttons">
-              <button type="button" class="button active">1</button>
-              <button type="button" class="button">2</button>
-              <button type="button" class="button">3</button>
+              @for ($i = 1; $i <= $danhmuc->lastPage(); $i++)
+                <a href="{{ $danhmuc->url($i) }}">
+                  <button type="button" class="button {{ $i == $danhmuc->currentPage() ? 'active' : '' }}">
+                    {{ $i }}
+                  </button>
+                </a>
+              @endfor
             </div>
-            <small>Page 1 of 3</small>
-          </div>
+            <small>Page {{ $danhmuc->currentPage() }} of {{ $danhmuc->lastPage() }}</small>
+         </div>
         </div>
       </div>
     </div>
