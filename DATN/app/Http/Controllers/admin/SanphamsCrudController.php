@@ -60,7 +60,7 @@ class SanphamsCrudController extends CrudController
             'type' => 'image',
             'height' => '150px',
             'width' => '200px',
-            'prefix' => '/storage/',
+            'prefix' => '/storage',
         ]);
     }
 
