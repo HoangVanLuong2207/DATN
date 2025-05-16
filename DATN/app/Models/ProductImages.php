@@ -6,7 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Topping extends Model
+class ProductImages extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -17,11 +17,15 @@ class Topping extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'topping';
+    protected $table = 'product_images';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
+   protected $fillable = [
+        'product_id',
+        'image_url',
+        // Thêm các trường khác mà bạn muốn cho phép gán hàng loạt
+    ];
     // protected $hidden = [];
 
     /*
@@ -35,7 +39,10 @@ class Topping extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+   public function product()
+{
+    return $this->belongsTo(Sanphams::class, 'product_id');
+}
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -145,7 +145,7 @@
         window.removeEventListener('beforeunload', preventUnload);
         $("button[type=submit]").prop('disabled', true);
       });
-
+<?php } ?>
       // Place the focus on the first element in the form
       @if( $crud->getAutoFocusOnFirstField() )
         @php

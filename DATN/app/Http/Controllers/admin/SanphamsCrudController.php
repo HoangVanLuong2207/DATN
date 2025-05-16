@@ -41,6 +41,8 @@ class SanphamsCrudController extends CrudController
      */
      protected function setupListOperation()
     {
+
+
         CRUD::column('id');
         CRUD::column('name');
       CRUD::addColumn([
@@ -51,14 +53,14 @@ class SanphamsCrudController extends CrudController
     'attribute' => 'name', // cột muốn hiển thị từ bảng liên kết
 ]);
 
-        CRUD::column('price');
-        CRUD::addColumn([
-            'name' => 'image',  // Tên cột chứa đường dẫn ảnh
+        CRUD::column('price')->suffix(' VND');
+         CRUD::addColumn([
+            'name' => 'image',     // Tên cột chứa đường dẫn ảnh
             'label' => 'Ảnh',
             'type' => 'image',
-             'height' => '150px',
-             'width'  => '200px',
-            'prefix' => '/storage/', // Đã sửa prefix
+            'height' => '150px',
+            'width' => '200px',
+            'prefix' => '/storage/',
         ]);
     }
 
@@ -73,12 +75,15 @@ class SanphamsCrudController extends CrudController
     {
         CRUD::setValidation(SanphamsRequest::class);
         CRUD::field('name')->type('text')->label('Tên sản phẩm');
-        CRUD::field([   // Upload
-            'name'      => 'image',
-            'label'     => 'Ảnh sản phẩm',
-            'type'      => 'upload',
-            'withFiles' => true
-        ]);
+       CRUD::field([
+    'name'      => 'image',
+    'label'     => 'Ảnh sản phẩm',
+    'type'      => 'upload',
+    'upload'    => true,
+    'withFiles' => true,
+    'prefix'    => '/product_images/', // không có dấu /
+    'disk'      => 'public',   // đảm bảo bạn đang dùng disk đúng
+]);
         // ...
         CRUD::field('mota')->type('textarea')->label('Mô tả');
         CRUD::field('price')->type('number')->label('Giá');
@@ -114,7 +119,7 @@ class SanphamsCrudController extends CrudController
     'type'      => 'upload',
     'upload'    => true,
     'withFiles' => true,
-    'prefix'    => 'storage/', // không có dấu /
+    'prefix'    => '/product_images/', // không có dấu /
     'disk'      => 'public',   // đảm bảo bạn đang dùng disk đúng
 ]);
 
@@ -170,6 +175,22 @@ class SanphamsCrudController extends CrudController
             'height' => '100px',
             'width'  => 'auto',
         ]);
+
+        CRUD::addColumn([
+    'name' => 'product_images',
+    'label' => 'Ảnh Sản Phẩm',
+    'type' => 'closure',
+    'escaped' => false,  // Quan trọng: cho phép render HTML
+    'function' => function ($entry) {
+        $html = '';
+        foreach ($entry->product_img as $image) {
+            $url = asset('storage/' . $image->image_url);
+            $html .= '<img src="' . $url . '" style="width:200px; height:100px; margin-top:10px; margin-right:10px">';
+        }
+        return $html ?: '-';
+    },
+]);
+
 
 CRUD::addColumn([
     'name' => 'created_at',

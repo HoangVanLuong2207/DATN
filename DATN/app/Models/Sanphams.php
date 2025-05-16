@@ -22,4 +22,8 @@ class Sanphams extends Model
     {
         return $this->belongsTo(Danhmucs::class, 'id_danhmuc');
     }
+    public function product_img()
+    {
+        return $this->hasMany(ProductImages::class, 'product_id');
+    }
 }
