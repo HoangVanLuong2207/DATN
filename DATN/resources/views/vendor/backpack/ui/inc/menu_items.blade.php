@@ -6,3 +6,4 @@
 <x-backpack::menu-item title="Sizes" icon="la la-question" :link="backpack_url('size')" />
 <x-backpack::menu-item title="Toppings" icon="la la-question" :link="backpack_url('topping')" />
 <x-backpack::menu-item title="Danhmucs" icon="la la-question" :link="backpack_url('danhmucs')" />
+<x-backpack::menu-item title="Product images" icon="la la-question" :link="backpack_url('product-images')" />

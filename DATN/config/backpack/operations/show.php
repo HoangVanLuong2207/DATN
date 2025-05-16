@@ -9,7 +9,7 @@
 return [
     // Define the size/looks of the content div for all CRUDs
     // To override per Controller use $this->crud->setShowContentClass('class-string')
-    'contentClass' => 'col-md-12',
+    'contentClass' => 'col-md-8',
 
     // Automatically add all columns from the db table?
     'setFromDb'  => true,
@@ -19,7 +19,7 @@ return [
 
     // If model has SoftDeletes, allow the admin to access the Show page for
     // soft deleted items & add a deleted_at column to ShowOperation?
-    'softDeletes' => false,
+    'softDeletes' => true,
 
     // Enable to group columns in tabs
     'tabsEnabled' => false,

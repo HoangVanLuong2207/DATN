@@ -22,13 +22,13 @@ return [
      * Possible values: horizontal, horizontal_dark, horizontal_overlap, vertical,
      * vertical_dark, vertical_transparent (legacy theme), right_vertical, right_vertical_dark, right_vertical_transparent
      */
-    'layout' => 'horizontal_overlap',
+    'layout' => 'vertical',
 
     /**
      * Pick a login page layout.
      * Possible values: default, illustration, cover
      */
-    'auth_layout' => 'default', // default, illustration, cover
+    'auth_layout' => 'illustration', // default, illustration, cover
 
     /**
      * Here you can easily load your own extra css styles.
@@ -69,7 +69,7 @@ return [
          * When false, the theme will only use the "defaultColorMode" set above.
          * In case "defaultColorMode" is null, system is the default.
          */
-        'showColorModeSwitcher' => true,
+        'showColorModeSwitcher' => false,
 
         /**
          * Fix the top-header component (present in "vertical_transparent") and the menu when the layout type is set as "horizontal".
